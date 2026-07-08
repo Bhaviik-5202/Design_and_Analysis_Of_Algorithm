@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 int main() {
     int n;
@@ -6,11 +7,14 @@ int main() {
     scanf("%d", &n);
 
     int found = 0;
+    clock_t start, end;
+    double cpu_time_used;
 
-    for(int start = 1; start < n; start++) {
+    start = clock();
+    for(int s = 1; s < n; s++) {
         int sum = 0;
 
-        for(int j = start; j < n; j++) {
+        for(int j = s; j < n; j++) {
             sum += j;
 
             if(sum == n) {
@@ -25,11 +29,15 @@ int main() {
         if(found)
             break;
     }
+    end = clock();
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
 
     if(found)
         printf("True\n");
     else
         printf("False\n");
+
+    printf("Execution Time = %f Seconds\n", cpu_time_used);
 
     return 0;
 }

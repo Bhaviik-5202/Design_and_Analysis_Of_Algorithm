@@ -17,7 +17,6 @@ void main() {
     printf("Enter Number: ");
     scanf("%d", &n);
 
-
     clock_t start, end;
     double cpu_time_used;
 

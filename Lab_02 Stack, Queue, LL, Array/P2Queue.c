@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 #define MAX 10
 
@@ -60,6 +61,8 @@ void display() {
 
 int main() {
     int OP;
+    clock_t start, end;
+    double cpu_time_used;
 
     while (1) {
         printf("\n");
@@ -72,15 +75,27 @@ int main() {
 
         switch (OP) {
             case 1:
+                start = clock();
                 enqueue();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
 
             case 2:
+                start = clock();
                 dequeue();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
 
             case 3:
+                start = clock();
                 display();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
 
             case 4:

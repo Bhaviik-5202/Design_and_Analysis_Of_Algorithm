@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <time.h>
 /*
 Time Complexity: O(√n)
 Space Complexity: O(1)
@@ -50,7 +50,18 @@ void main() {
     printf("Enter Number: ");
     scanf("%d", &n);
 
+    clock_t start, end;
+    double cpu_time_used;
+
+    start = clock();
     printf("Prime Factors: ");
     primeFactors(n);
+    printf("\n");
+    end = clock();
+
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+    printf("Execution Time = %f Seconds\n", cpu_time_used);
+
 
 }

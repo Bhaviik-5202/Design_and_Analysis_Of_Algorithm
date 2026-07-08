@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
 
 /*
@@ -33,6 +34,15 @@ void main() {
     printf("Enter m : ");
     scanf("%d", &m);
 
+    clock_t start, end;
+    double cpu_time_used;
+
+    start = clock();
     printf("Closest Number = %d", closestNumber(n, m));
+    end = clock();
+
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+    printf("Execution Time = %f Seconds\n", cpu_time_used);
 
 }

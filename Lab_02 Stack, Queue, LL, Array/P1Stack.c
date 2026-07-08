@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #define SIZE 100
 
 int STACK[SIZE];
@@ -73,6 +74,8 @@ void DISPLAY() {
 
 int main() {
     int OP;
+    clock_t start, end;
+    double cpu_time_used;
     while (1) {
         printf("\n");
         printf("1. PUSH :\n");
@@ -84,19 +87,39 @@ int main() {
     
         switch(OP) {
             case 1:
+                start = clock();
                 PUSH();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
             case 2:
+                start = clock();
                 POP();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
             case 3:
+                start = clock();
                 PEEP();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
             case 4:
+                start = clock();
                 CHANGE();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
             case 5:
+                start = clock();
                 DISPLAY();
+                end = clock();
+                cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+                printf("Execution Time = %f Seconds\n", cpu_time_used);
                 break;
             default:
                 printf("Invalid choice");
