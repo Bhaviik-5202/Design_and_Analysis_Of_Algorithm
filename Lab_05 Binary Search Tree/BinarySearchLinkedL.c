@@ -98,8 +98,9 @@ int main() {
     struct Node *result = binarySearch(head, target);
     end = clock();
 
+    // Clock Per Sec
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-
+    
     if (result != NULL) {
         printf("Element %d Found.\n", result->data);
     } else {
