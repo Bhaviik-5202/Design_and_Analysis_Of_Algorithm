@@ -14,68 +14,72 @@ struct Node* createNode(int data) {
 }
 
 struct Node* insert(struct Node* root, int data) {
-    if(root == NULL)
+    if(root == NULL) {
         return createNode(data);
+    }
 
-    if(data < root->data)
+    if(data < root->data) {
         root->left = insert(root->left, data);
-    else
+    }
+    else {
         root->right = insert(root->right, data);
+    }
 
     return root;
 }
 
-void inorder(struct Node* root, int arr[], int *index) {
-    if(root != NULL)
-    {
-        inorder(root->left, arr, index);
-        arr[(*index)++] = root->data;
-        inorder(root->right, arr, index);
+struct Node* search(struct Node* root, int key) {
+    if(root == NULL || root->data == key) {
+        return root;
     }
+
+    if(key < root->data) {
+        return search(root->left, key);
+    }
+
+    return search(root->right, key);
+}
+
+int findPair(struct Node* root, struct Node* current, int target) {
+    if(current == NULL) {
+        return 0;
+    }
+
+    int complement = target - current->data;
+
+    struct Node* temp = search(root, complement);
+
+    if(temp != NULL && temp != current)
+        return 1;
+
+    if(findPair(root, current->left, target))
+        return 1;
+
+    return findPair(root, current->right, target);
 }
 
 int main() {
-    
-    struct Node *root = NULL;
-    int n, i, value, target;
+
+    struct Node* root = NULL;
+    int n, value, target;
 
     printf("Enter number of nodes: ");
-    scanf("%d", &n);
+    scanf("%d",&n);
 
     printf("Enter node values:\n");
-    for(i = 0; i < n; i++)
-    {
-        scanf("%d", &value);
-        root = insert(root, value);
+
+    for(int i=0;i<n;i++) {
+        scanf("%d",&value);
+        root = insert(root,value);
     }
 
     printf("Enter target: ");
-    scanf("%d", &target);
+    scanf("%d",&target);
 
-    int arr[100];
-    int index = 0;
-
-    inorder(root, arr, &index);
-
-    int left = 0;
-    int right = index - 1;
-
-    while(left < right)
-    {
-        int sum = arr[left] + arr[right];
-
-        if(sum == target)
-        {
-            printf("True");
-            return 0;
-        }
-        else if(sum < target)
-            left++;
-        else
-            right--;
-    }
-
-    printf("False");
+    if(findPair(root, root, target))
+        printf("True");
+    else
+        printf("False");
 
     return 0;
 }
